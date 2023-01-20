@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NodeControler : MonoBehaviour
+public class NodeController : MonoBehaviour
 {
     public bool canMoveLeft = false;
     public bool canMoveRight = false;
@@ -82,5 +82,29 @@ public class NodeControler : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public GameObject GetNodeFromDirection(string direction)
+    {
+        if (direction == "left" && canMoveLeft)
+        {
+            return nodeLeft;
+        }
+        else if (direction == "right" && canMoveRight)
+        {
+            return nodeRight;
+        }
+        else if (direction == "up" && canMoveUp)
+        {
+            return nodeUp;
+        }
+        else if (direction == "down" && canMoveDown)
+        {
+            return nodeDown;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
