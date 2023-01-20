@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnNodes : MonoBehaviour
 {
-    int numToSpawn = 29;
+    //int numToSpawn = 29;
 
     public float currentSpawnOffset;
     public float spanwOffset = 0.3f;
