@@ -113,21 +113,7 @@ public class EnemyController : MonoBehaviour
             //Scatter mode
             if (gameManager.currentGhostMode == GameManager.GhostMode.scatter)
             {
-                //If we reached the scatter node, at one of index
-                if (transform.position.x == scatterNodes[scatterNodeIndex].transform.position.x && transform.position.y == scatterNodes[scatterNodeIndex].transform.position.y)
-                {
-                    scatterNodeIndex++;
-
-                    if (scatterNodeIndex == scatterNodes.Length - 1)
-                    {
-                        scatterNodeIndex = 0;
-                    }
-                }
-
-                string direction = GetClosestDirection(scatterNodes[scatterNodeIndex].transform.position);
-
-                movementController.SetDirection(direction);
-
+                DetermineGhostScatterModeDirection();
 
             }
             else if (isFrightened)
@@ -235,7 +221,25 @@ public class EnemyController : MonoBehaviour
         movementController.SetDirection(direction);
     }
 
-     void DeterminePinkGhostDiretion()
+    void DetermineGhostScatterModeDirection()
+    {
+        //If we reached the scatter node, at one of index
+        if (transform.position.x == scatterNodes[scatterNodeIndex].transform.position.x && transform.position.y == scatterNodes[scatterNodeIndex].transform.position.y)
+        {
+            scatterNodeIndex++;
+
+            if (scatterNodeIndex == scatterNodes.Length - 1)
+            {
+                scatterNodeIndex = 0;
+            }
+        }
+
+        string direction = GetClosestDirection(scatterNodes[scatterNodeIndex].transform.position);
+
+        movementController.SetDirection(direction);
+
+    }
+    void DeterminePinkGhostDiretion()
      {
             string pacmansDirection = gameManager.pacman.GetComponent<MovementController>().lastMovingDirection;
             float distanceBetweenNodes = 0.35f;
@@ -300,7 +304,24 @@ public class EnemyController : MonoBehaviour
 
     void DetermineOrangeGhostDiretion()
     {
+        float distance = Vector2.Distance(gameManager.pacman.transform.position, transform.position);
+        float distanceBetweenNodes = 0.35f;
 
+        if (distance < 0)
+        {
+            distance *= -1;
+        }
+
+        // If we are within 8 nodes of pacman, chase him using red's logic
+        if (distance <= distanceBetweenNodes * 8)
+        {
+            DetermineRedGhostDiretion();
+        }
+        //othwerwise use scatter mode logic
+        else
+        {
+            DetermineGhostScatterModeDirection();
+        }
     }
 
     string GetClosestDirection(Vector2 target)
