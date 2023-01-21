@@ -118,7 +118,8 @@ public class EnemyController : MonoBehaviour
             }
             else if (isFrightened)
             {
-
+                string direction = GetRandomDirection();
+                movementController.SetDirection(direction);
             }
             //chase mode
             else
@@ -298,9 +299,35 @@ public class EnemyController : MonoBehaviour
 
             string direction = GetClosestDirection(blueTarget);
             movementController.SetDirection(direction);
-       }   
+       }
 
+    string GetRandomDirection()
+    {
+        List<string> possibleDirections = new List<string>();
+        NodeController nodeController = movementController.currentNode.GetComponent<NodeController>();
 
+        if (nodeController.canMoveDown && movementController.lastMovingDirection != "up")
+        {
+            possibleDirections.Add("down");
+        }
+        else if (nodeController.canMoveUp && movementController.lastMovingDirection != "down")
+        {
+            possibleDirections.Add("up");
+        }
+        else if (nodeController.canMoveRight && movementController.lastMovingDirection != "left")
+        {
+            possibleDirections.Add("right");
+        }
+        else if (nodeController.canMoveLeft && movementController.lastMovingDirection != "right")
+        {
+            possibleDirections.Add("left");
+        }
+
+        string direction = "";
+        int randomDirectionIndex = Random.Range(0, possibleDirections.Count - 1);
+        direction = possibleDirections[randomDirectionIndex];
+        return direction;
+    }
 
     void DetermineOrangeGhostDiretion()
     {
