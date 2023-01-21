@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     }
 
     public GhostNodesStatesEnum ghostNodeState;
+    public GhostNodesStatesEnum respawnState;
+
 
     public enum GhostType
     {
@@ -34,10 +36,12 @@ public class EnemyController : MonoBehaviour
     public MovementController movementController;
 
     public GameObject startingNode;
-
+     
     public bool readyToLeaveHome = false;
 
     public GameManager gameManager;
+
+    public bool testRespawn = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -47,22 +51,30 @@ public class EnemyController : MonoBehaviour
         if (ghostType == GhostType.red)
         {
             ghostNodeState = GhostNodesStatesEnum.startNode;
+            respawnState = GhostNodesStatesEnum.centerNode;
             startingNode = ghostNodeStart;
+            readyToLeaveHome = true;
         }
         else if (ghostType == GhostType.pink)
         {
             ghostNodeState = GhostNodesStatesEnum.centerNode;
             startingNode = ghostNodeCenter;
+            respawnState = GhostNodesStatesEnum.centerNode;
+
         }
         else if (ghostType == GhostType.blue)
         {
             ghostNodeState = GhostNodesStatesEnum.leftNode;
             startingNode = ghostNodeLeft;
+            respawnState = GhostNodesStatesEnum.leftNode;
+
         }
         else if (ghostType == GhostType.orange)
         {
             ghostNodeState = GhostNodesStatesEnum.rightNode;
             startingNode = ghostNodeRight;
+            respawnState = GhostNodesStatesEnum.rightNode;
+
         }
         movementController.currentNode = startingNode;
         transform.position = startingNode.transform.position;  //fast move ghost to position 
@@ -71,7 +83,12 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (testRespawn == true)
+        {
+            readyToLeaveHome = false;
+            ghostNodeState = GhostNodesStatesEnum.respawning;
+            testRespawn = false;
+        }
     }
 
     public void ReachedCenterOfNode(NodeController nodeController)
@@ -86,8 +103,44 @@ public class EnemyController : MonoBehaviour
         }
         else if (ghostNodeState == GhostNodesStatesEnum.respawning)
         {
-            //Determine quickest direction to home
+            string direction = "";
 
+            if (transform.position.x == ghostNodeStart.transform.position.x && transform.position.y == ghostNodeStart.transform.position.y)
+            {
+                direction = "down";
+            }
+            else if (transform.position.x == ghostNodeCenter.transform.position.x && transform.position.y == ghostNodeCenter.transform.position.y)
+            {
+                if (respawnState == GhostNodesStatesEnum.centerNode)
+                {
+                    ghostNodeState = respawnState;
+                }
+                else if (respawnState == GhostNodesStatesEnum.leftNode)
+                {
+                    direction = "left";
+                }
+                else if (respawnState == GhostNodesStatesEnum.rightNode)
+                {
+                    direction = "right";
+                }
+            }
+            //If our respawn state is either the left or right, and we got to that node, leave home again
+            else if (
+                (transform.position.x == ghostNodeLeft.transform.position.x && transform.position.y == ghostNodeLeft.transform.position.y)
+                || (transform.position.x == ghostNodeRight.transform.position.x && transform.position.y == ghostNodeRight.transform.position.y)
+                )
+            {
+                ghostNodeState = respawnState;
+            }
+            //We are in the gameboard still, locate our start
+            else
+            {
+                //Determine quickest direction to home
+                direction = GetClosestDirection(ghostNodeStart.transform.position);
+            }
+
+
+            movementController.SetDirection(direction);
         }
         else
         {

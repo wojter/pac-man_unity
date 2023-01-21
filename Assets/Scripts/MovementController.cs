@@ -69,22 +69,23 @@ public class MovementController : MonoBehaviour
             //Otherwise, finth the next node we re going to moving towards
             else
             {
-            //Get the next node from our node controller using our current dirction
-            GameObject newNode = currentNodeController.GetNodeFromDirection(direction);
-            if (newNode != null)
-            {
-                currentNode = newNode;
-                lastMovingDirection = direction;
-            }
-            else
-            {
-                direction = lastMovingDirection;
-                newNode = currentNodeController.GetNodeFromDirection(direction);
+
+                //Get the next node from our node controller using our current dirction
+                GameObject newNode = currentNodeController.GetNodeFromDirection(direction);
                 if (newNode != null)
                 {
                     currentNode = newNode;
+                    lastMovingDirection = direction;
                 }
-            }
+                else
+                {
+                    direction = lastMovingDirection;
+                    newNode = currentNodeController.GetNodeFromDirection(direction);
+                    if (newNode != null)
+                    {
+                        currentNode = newNode;
+                    }
+                }
             }
 
 
