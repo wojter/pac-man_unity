@@ -28,6 +28,12 @@ public class GameManager : MonoBehaviour
     public GameObject pinkGhost;
     public GameObject orangeGhost;
 
+    public int totalPellets;
+    public int pelletsLeft;
+    public int pelletsCollectedOnThisLive;
+
+    public bool hadDeathOnThisLevel = false;
+
     public enum GhostMode
     {
         chase, scatter
@@ -36,6 +42,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
+        pinkGhost.GetComponent<EnemyController>().readyToLeaveHome = true;
         currentGhostMode = GhostMode.chase;
         ghostNodeStart.GetComponent<NodeController>().isGhostStartingNode = true;
         pacman = GameObject.Find("Player");
@@ -48,6 +56,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void GetPelletFromNodeController()
+    {
+        totalPellets++;
+        pelletsLeft++;
     }
 
     public void AddToScore(int amount)
@@ -69,6 +83,32 @@ public class GameManager : MonoBehaviour
             currentMunch = 0;
         }
 
+        pelletsLeft--;
+        pelletsCollectedOnThisLive++;
+
+        int requiredBluePellets = 0;
+        int requiredOrangePellets = 0;
+
+        if (hadDeathOnThisLevel)
+        {
+            requiredBluePellets = 12;
+            requiredOrangePellets = 32;
+        }
+        else
+        {
+            requiredBluePellets = 30;
+            requiredOrangePellets = 60;
+        }
+
+        if (pelletsCollectedOnThisLive >= requiredBluePellets && !blueGhost.GetComponent<EnemyController>().leftHomeBefore)
+        {
+            blueGhost.GetComponent<EnemyController>().readyToLeaveHome = true;
+        }
+
+        if (pelletsCollectedOnThisLive >= requiredOrangePellets && !orangeGhost.GetComponent<EnemyController>().leftHomeBefore)
+        {
+            orangeGhost.GetComponent<EnemyController>().readyToLeaveHome = true;
+        }
         //Add to our score 
         AddToScore(10);
         //Check

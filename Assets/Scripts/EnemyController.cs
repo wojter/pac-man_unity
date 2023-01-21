@@ -48,6 +48,8 @@ public class EnemyController : MonoBehaviour
     public GameObject[] scatterNodes;
     public int scatterNodeIndex;
 
+    public bool leftHomeBefore = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -60,6 +62,7 @@ public class EnemyController : MonoBehaviour
             respawnState = GhostNodesStatesEnum.centerNode;
             startingNode = ghostNodeStart;
             readyToLeaveHome = true;
+            leftHomeBefore = true;
         }
         else if (ghostType == GhostType.pink)
         {
@@ -110,6 +113,7 @@ public class EnemyController : MonoBehaviour
     {
         if (ghostNodeState == GhostNodesStatesEnum.movingInNodes)
         {
+            leftHomeBefore = true;
             //Scatter mode
             if (gameManager.currentGhostMode == GameManager.GhostMode.scatter)
             {
