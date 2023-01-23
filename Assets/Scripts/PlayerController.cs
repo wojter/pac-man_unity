@@ -28,13 +28,15 @@ public class PlayerController : MonoBehaviour
 
     public void Setup()
     {
+        animator.SetBool("dead", false);
+        animator.SetBool("moving", false);
+
         movementController.currentNode = startNode;
         movementController.direction = "left";
         movementController.lastMovingDirection = "left";
         sprite.flipX = false;
         transform.position = startPos;
         animator.speed = 1;
-        animator.SetBool("moving", false);
 
     }
 
@@ -98,6 +100,7 @@ public class PlayerController : MonoBehaviour
     public void Death()
     {
         animator.SetBool("moving", false);
+        animator.speed = 1;
         animator.SetBool("dead", true);
     }
 }

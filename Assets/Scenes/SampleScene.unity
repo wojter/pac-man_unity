@@ -1644,7 +1644,7 @@ MonoBehaviour:
   leftHomeBefore: 0
   isVisible: 1
   ghostSprite: {fileID: 0}
-  eyesSprite: {fileID: 0}
+  eyesSprite: {fileID: 417887135}
 --- !u!4 &45333287
 Transform:
   m_ObjectHideFlags: 0
@@ -3293,7 +3293,7 @@ MonoBehaviour:
   leftHomeBefore: 0
   isVisible: 1
   ghostSprite: {fileID: 0}
-  eyesSprite: {fileID: 0}
+  eyesSprite: {fileID: 432902568}
 --- !u!4 &95998536
 Transform:
   m_ObjectHideFlags: 0
@@ -9342,7 +9342,7 @@ MonoBehaviour:
   leftHomeBefore: 0
   isVisible: 1
   ghostSprite: {fileID: 0}
-  eyesSprite: {fileID: 0}
+  eyesSprite: {fileID: 324849986}
 --- !u!4 &266350127
 Transform:
   m_ObjectHideFlags: 0
@@ -17702,7 +17702,7 @@ MonoBehaviour:
   leftHomeBefore: 0
   isVisible: 1
   ghostSprite: {fileID: 0}
-  eyesSprite: {fileID: 0}
+  eyesSprite: {fileID: 615152112}
 --- !u!4 &582518544
 Transform:
   m_ObjectHideFlags: 0
