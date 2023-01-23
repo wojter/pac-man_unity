@@ -55,9 +55,14 @@ public class EnemyController : MonoBehaviour
     public SpriteRenderer ghostSprite;
     public SpriteRenderer eyesSprite;
 
+    public Animator animator;
+
+    public Color color;
+
     // Start is called before the first frame update
     void Awake()
     {
+        animator = GetComponent<Animator>();
         ghostSprite = GetComponent<SpriteRenderer>();
         //eyesSprite = GetComponentInChildren<SpriteRenderer>();
 
@@ -98,6 +103,8 @@ public class EnemyController : MonoBehaviour
 
     public void Setup()
     {
+        animator.SetBool("moving", false);
+
         ghostNodeState = startGhostNodeState;
         readyToLeaveHome = false;
 
@@ -152,10 +159,24 @@ public class EnemyController : MonoBehaviour
             eyesSprite.enabled = false;
         }
 
+        if (isFrightened)
+        {
+            animator.SetBool("frightened", true);
+            eyesSprite.enabled = false;
+            ghostSprite.color = new Color(255, 255, 255, 255);
+        }
+        else
+        {
+            animator.SetBool("frightened", false);
+            ghostSprite.color = color;
+        }
+        animator.SetBool("moving", true);
+
         if (!gameManager.gameIsRunning)
         {
             return;
         }
+
 
         if (testRespawn == true)
         {

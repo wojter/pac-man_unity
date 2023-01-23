@@ -1500,6 +1500,7 @@ GameObject:
   - component: {fileID: 45333285}
   - component: {fileID: 45333284}
   - component: {fileID: 45333283}
+  - component: {fileID: 45333288}
   m_Layer: 0
   m_Name: Blue
   m_TagString: Untagged
@@ -1575,7 +1576,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1c53a480393b95e49a61a90d649be763, type: 3}
-  m_Color: {r: 0.019607844, g: 0.98039216, b: 0.98039216, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1645,6 +1646,8 @@ MonoBehaviour:
   isVisible: 1
   ghostSprite: {fileID: 0}
   eyesSprite: {fileID: 417887135}
+  animator: {fileID: 0}
+  color: {r: 0, g: 0.98039216, b: 0.98039216, a: 1}
 --- !u!4 &45333287
 Transform:
   m_ObjectHideFlags: 0
@@ -1661,6 +1664,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &45333288
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45333282}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04738c3363f425b42945055b1fcb441f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &52903038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3151,6 +3174,7 @@ GameObject:
   - component: {fileID: 95998534}
   - component: {fileID: 95998533}
   - component: {fileID: 95998532}
+  - component: {fileID: 95998537}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Untagged
@@ -3226,7 +3250,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1c53a480393b95e49a61a90d649be763, type: 3}
-  m_Color: {r: 0.98039216, g: 0.5176471, b: 0.05882353, a: 1}
+  m_Color: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3294,6 +3318,8 @@ MonoBehaviour:
   isVisible: 1
   ghostSprite: {fileID: 0}
   eyesSprite: {fileID: 432902568}
+  animator: {fileID: 0}
+  color: {r: 0.98039216, g: 0.5176471, b: 0.047058824, a: 1}
 --- !u!4 &95998536
 Transform:
   m_ObjectHideFlags: 0
@@ -3310,6 +3336,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95998537
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95998531}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04738c3363f425b42945055b1fcb441f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &97554146
 GameObject:
   m_ObjectHideFlags: 0
@@ -9203,6 +9249,7 @@ GameObject:
   - component: {fileID: 266350125}
   - component: {fileID: 266350124}
   - component: {fileID: 266350123}
+  - component: {fileID: 266350128}
   m_Layer: 0
   m_Name: Red
   m_TagString: Untagged
@@ -9278,7 +9325,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1c53a480393b95e49a61a90d649be763, type: 3}
-  m_Color: {r: 0.9056604, g: 0.008524654, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -9343,6 +9390,8 @@ MonoBehaviour:
   isVisible: 1
   ghostSprite: {fileID: 0}
   eyesSprite: {fileID: 324849986}
+  animator: {fileID: 0}
+  color: {r: 0.9433962, g: 0, b: 0, a: 1}
 --- !u!4 &266350127
 Transform:
   m_ObjectHideFlags: 0
@@ -9359,6 +9408,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &266350128
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266350122}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04738c3363f425b42945055b1fcb441f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &268598468
 GameObject:
   m_ObjectHideFlags: 0
@@ -17563,6 +17632,7 @@ GameObject:
   - component: {fileID: 582518542}
   - component: {fileID: 582518541}
   - component: {fileID: 582518540}
+  - component: {fileID: 582518545}
   m_Layer: 0
   m_Name: Pink
   m_TagString: Untagged
@@ -17638,7 +17708,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1c53a480393b95e49a61a90d649be763, type: 3}
-  m_Color: {r: 0.98039216, g: 0.47843137, b: 0.49019608, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -17703,6 +17773,8 @@ MonoBehaviour:
   isVisible: 1
   ghostSprite: {fileID: 0}
   eyesSprite: {fileID: 615152112}
+  animator: {fileID: 0}
+  color: {r: 0.98039216, g: 0.47843137, b: 0.47843137, a: 1}
 --- !u!4 &582518544
 Transform:
   m_ObjectHideFlags: 0
@@ -17719,6 +17791,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &582518545
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582518539}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04738c3363f425b42945055b1fcb441f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &584374284
 GameObject:
   m_ObjectHideFlags: 0
@@ -35517,6 +35609,11 @@ MonoBehaviour:
   currentLevel: 0
   blackBackground: {fileID: 809786974}
   gameOverText: {fileID: 1224453441}
+  ghostModeTimers: 07000000140000000700000014000000050000001400000005000000
+  ghostModeTimerIndex: 0
+  ghostModeTimer: 0
+  runningTimer: 0
+  completedTimer: 0
   currentGhostMode: 0
 --- !u!4 &1202956917
 Transform:
