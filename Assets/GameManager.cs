@@ -28,11 +28,29 @@ public class GameManager : MonoBehaviour
     public GameObject pinkGhost;
     public GameObject orangeGhost;
 
+    public EnemyController redGhostContoller;
+    public EnemyController blueGhostContoller;
+    public EnemyController orangeGhostContoller;
+    public EnemyController pinkGhostContoller;
+
+
     public int totalPellets;
     public int pelletsLeft;
     public int pelletsCollectedOnThisLive;
 
     public bool hadDeathOnThisLevel = false;
+
+    public bool gameIsRunning;
+
+    public List<NodeController> nodeControllers = new List<NodeController>();
+
+    public bool newGame;
+    public bool clearedLevel;
+
+    public AudioSource startGameAudio;
+
+    public int lives;
+    public int currentLevel;
 
     public enum GhostMode
     {
@@ -42,14 +60,75 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        newGame = true;
+        clearedLevel = false;
 
-        pinkGhost.GetComponent<EnemyController>().readyToLeaveHome = true;
-        currentGhostMode = GhostMode.chase;
+        redGhostContoller = redGhost.GetComponent<EnemyController>();
+        blueGhostContoller = blueGhost.GetComponent<EnemyController>();
+        orangeGhostContoller = orangeGhost.GetComponent<EnemyController>();
+        pinkGhostContoller = pinkGhost.GetComponent<EnemyController>();
+
+
         ghostNodeStart.GetComponent<NodeController>().isGhostStartingNode = true;
         pacman = GameObject.Find("Player");
-        score = 0;
+
+        StartCoroutine(Setup());
+    }
+
+    public IEnumerator Setup()
+    {
+        //If pacman clears a level, a background will appear covering the level, and the game will pause for 0.1 seconds
+        if (clearedLevel)
+        {
+            //Activate background
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        pelletsCollectedOnThisLive = 0;
+        currentGhostMode = GhostMode.scatter;
+        gameIsRunning = false;
         currentMunch = 0;
+
+        float waitTimer = 1f;
+
+        if (clearedLevel || newGame)
+        {
+            waitTimer = 4f;
+            //Pellets will respawn when pacman clears the level or starts a new game
+            for (int i=0; i< nodeControllers.Count; i++)
+            {
+                nodeControllers[i].RespawnPellet();
+            }
+        }
+
+        if (newGame)
+        {
+            startGameAudio.Play();
+            scoreText.text = "Score: " + score.ToString();
+            score = 0;
+            lives = 3;
+            currentLevel = 1;
+        }
+
+        pacman.GetComponent<PlayerController>().Setup();
+
+        redGhostContoller.Setup();
+        pinkGhostContoller.Setup();
+        blueGhostContoller.Setup();
+        orangeGhostContoller.Setup();
+
+        newGame = false;
+        clearedLevel = false;
+        yield return new WaitForSeconds(waitTimer);
+
+        StartGame();
+    }
+
+    void StartGame()
+    {
+        gameIsRunning = true;
         siren.Play();
+
     }
 
     // Update is called once per frame
@@ -58,8 +137,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void GetPelletFromNodeController()
+    public void GetPelletFromNodeController(NodeController nodeController)
     {
+        nodeControllers.Add(nodeController);
         totalPellets++;
         pelletsLeft++;
     }

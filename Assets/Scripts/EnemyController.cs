@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
 
     public GhostNodesStatesEnum ghostNodeState;
     public GhostNodesStatesEnum respawnState;
-
+    public GhostNodesStatesEnum startGhostNodeState;
 
     public enum GhostType
     {
@@ -53,45 +53,71 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        scatterNodeIndex = 0;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         movementController = GetComponent<MovementController>();
         if (ghostType == GhostType.red)
         {
-            ghostNodeState = GhostNodesStatesEnum.startNode;
+            startGhostNodeState = GhostNodesStatesEnum.startNode;
             respawnState = GhostNodesStatesEnum.centerNode;
             startingNode = ghostNodeStart;
-            readyToLeaveHome = true;
-            leftHomeBefore = true;
+
         }
         else if (ghostType == GhostType.pink)
         {
-            ghostNodeState = GhostNodesStatesEnum.centerNode;
+            startGhostNodeState = GhostNodesStatesEnum.centerNode;
             startingNode = ghostNodeCenter;
             respawnState = GhostNodesStatesEnum.centerNode;
 
         }
         else if (ghostType == GhostType.blue)
         {
-            ghostNodeState = GhostNodesStatesEnum.leftNode;
+            startGhostNodeState = GhostNodesStatesEnum.leftNode;
             startingNode = ghostNodeLeft;
             respawnState = GhostNodesStatesEnum.leftNode;
 
         }
         else if (ghostType == GhostType.orange)
         {
-            ghostNodeState = GhostNodesStatesEnum.rightNode;
+            startGhostNodeState = GhostNodesStatesEnum.rightNode;
             startingNode = ghostNodeRight;
             respawnState = GhostNodesStatesEnum.rightNode;
 
         }
-        movementController.currentNode = startingNode;
-        transform.position = startingNode.transform.position;  //fast move ghost to position 
+        
     }
+
+
+    public void Setup()
+    {
+        ghostNodeState = startGhostNodeState;
+
+        //Reset our ghost back to their home position
+        movementController.currentNode = startingNode;
+        transform.position = startingNode.transform.position;
+
+        //Set theri scatter node index back to 0
+        scatterNodeIndex = 0;
+
+        //Set isFrightened
+        isFrightened = false;
+
+        //Set readyToLeaveHome to be false if there are blue or pink
+        if (ghostType == GhostType.red)
+        {
+            readyToLeaveHome = true;
+            leftHomeBefore = true;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
+        if (!gameManager.gameIsRunning)
+        {
+            return;
+        }
+
         if (testRespawn == true)
         {
             readyToLeaveHome = false;
