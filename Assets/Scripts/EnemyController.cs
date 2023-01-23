@@ -91,6 +91,7 @@ public class EnemyController : MonoBehaviour
     public void Setup()
     {
         ghostNodeState = startGhostNodeState;
+        readyToLeaveHome = false;
 
         //Reset our ghost back to their home position
         //Debug.Log("startingNode", startingNode);
@@ -100,6 +101,9 @@ public class EnemyController : MonoBehaviour
             movementController.currentNode = startingNode;
 
         }
+
+        movementController.direction = "";
+        movementController.lastMovingDirection = "";
 
         transform.position = startingNode.transform.position;
 

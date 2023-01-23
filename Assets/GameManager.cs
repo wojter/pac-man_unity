@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public int lives;
     public int currentLevel;
 
+    public Image blackBackground;
     public enum GhostMode
     {
         chase, scatter
@@ -72,6 +73,8 @@ public class GameManager : MonoBehaviour
         ghostNodeStart.GetComponent<NodeController>().isGhostStartingNode = true;
         pacman = GameObject.Find("Player");
 
+        blackBackground.enabled = false;
+
         StartCoroutine(Setup());
     }
 
@@ -81,8 +84,10 @@ public class GameManager : MonoBehaviour
         if (clearedLevel)
         {
             //Activate background
+            blackBackground.enabled = true;
             yield return new WaitForSeconds(0.1f);
         }
+        blackBackground.enabled = false;
 
         pelletsCollectedOnThisLive = 0;
         currentGhostMode = GhostMode.scatter;
@@ -135,6 +140,7 @@ public class GameManager : MonoBehaviour
     {
         gameIsRunning = false;
         siren.Stop();
+        pacman.GetComponent<PlayerController>().Stop();
     }
 
     // Update is called once per frame
