@@ -187,6 +187,8 @@ public class EnemyController : MonoBehaviour
         else
         {
             animator.SetBool("frightened", false);
+            animator.SetBool("frightenedBlinking", false);
+
             ghostSprite.color = color;
         }
         animator.SetBool("moving", true);
@@ -196,6 +198,15 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+        if (gameManager.powrPelletTimer - gameManager.currentPowerPelletTime <= 3)
+        {
+            animator.SetBool("frightenedBlinking", true);
+        }
+        else
+        {
+            animator.SetBool("frightenedBlinking", false);
+
+        }
 
         if (testRespawn == true)
         {
