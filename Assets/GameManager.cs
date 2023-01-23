@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
     public float powrPelletTimer = 8f;
     public int powerPelletMultiplier = 1;
 
+    public Text livesText;
+
     public enum GhostMode
     {
         chase, scatter
@@ -137,7 +139,7 @@ public class GameManager : MonoBehaviour
             startGameAudio.Play();
             score = 0;
             scoreText.text = "Score: " + score.ToString();
-            lives = 3;
+            SetLives(3);
             currentLevel = 1;
         }
 
@@ -155,6 +157,12 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
+    void SetLives(int newLives)
+    {
+        lives = newLives;
+        livesText.text = "Lives: " + lives;
+    }
+
     void StartGame()
     {
         gameIsRunning = true;
@@ -167,6 +175,7 @@ public class GameManager : MonoBehaviour
         gameIsRunning = false;
         siren.Stop();
         powerPelletAudio.Stop();
+        respawningAudio.Stop();
         pacman.GetComponent<PlayerController>().Stop();
     }
 
@@ -348,6 +357,7 @@ public class GameManager : MonoBehaviour
         death.Play();
         yield return new WaitForSeconds(3);
 
+        SetLives(lives - 1);
         lives--;
         if (lives <= 0)
         {

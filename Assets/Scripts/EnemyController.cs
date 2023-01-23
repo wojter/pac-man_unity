@@ -221,7 +221,18 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            movementController.SetSpeed(1);
+            if (isFrightened)
+            {
+                movementController.SetSpeed(1);
+            }
+            else if (ghostNodeState == GhostNodesStatesEnum.respawning)
+            {
+                movementController.SetSpeed(7);
+            }
+            else
+            {
+                movementController.SetSpeed(2);
+            }
         }
     }
 
