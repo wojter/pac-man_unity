@@ -148,9 +148,28 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (ghostNodeState != GhostNodesStatesEnum.movingInNodes || !gameManager.isPowerPelletRunning)
+        {
+            isFrightened = false;
+        }
+
+        if (!gameManager.isPowerPelletRunning)
+        {
+            isFrightened = false;
+        }
+
         if (isVisible)
         {
-            ghostSprite.enabled = true;
+            if (ghostNodeState != GhostNodesStatesEnum.respawning)
+            {
+                ghostSprite.enabled = true;
+
+            }
+            else
+            {
+                ghostSprite.enabled = false;
+
+            }
             eyesSprite.enabled = true;
         }
         else
@@ -193,6 +212,11 @@ public class EnemyController : MonoBehaviour
         {
             movementController.SetSpeed(1);
         }
+    }
+
+    public void SetFrightened(bool newIsFrightened)
+    {
+        isFrightened = newIsFrightened;
     }
 
     public void ReachedCenterOfNode(NodeController nodeController)
@@ -526,7 +550,8 @@ public class EnemyController : MonoBehaviour
             //Get Eaten
             if (isFrightened)
             {
-
+                gameManager.GhostEaten();
+                ghostNodeState = GhostNodesStatesEnum.respawning;
             }
             //Eat Player
             else

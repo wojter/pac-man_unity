@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public AudioSource siren;
     public AudioSource munch1;
     public AudioSource munch2;
+    public AudioSource powerPelletAudio;
+
+
     public int currentMunch = 0;
 
     public int score;
@@ -62,6 +65,12 @@ public class GameManager : MonoBehaviour
     public float ghostModeTimer = 0f;
     public bool runningTimer;
     public bool completedTimer;
+
+
+    public bool isPowerPelletRunning = false;
+    public float currentPowerPelletTime = 0;
+    public float powrPelletTimer = 8f;
+    public int powerPelletMultiplier = 1;
 
     public enum GhostMode
     {
@@ -156,12 +165,14 @@ public class GameManager : MonoBehaviour
     {
         gameIsRunning = false;
         siren.Stop();
+        powerPelletAudio.Stop();
         pacman.GetComponent<PlayerController>().Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (!gameIsRunning)
         {
             return;
@@ -188,6 +199,19 @@ public class GameManager : MonoBehaviour
                     runningTimer = false;
                     currentGhostMode = GhostMode.chase;
                 }
+            }
+        }
+         
+         if (isPowerPelletRunning)
+        {
+            currentPowerPelletTime += Time.deltaTime;
+            if (currentPowerPelletTime >= powrPelletTimer)
+            {
+                isPowerPelletRunning = false;
+                currentPowerPelletTime = 0;
+                powerPelletAudio.Stop();
+                siren.Play();
+                powerPelletMultiplier = 1;
             }
         }
     }
@@ -258,6 +282,31 @@ public class GameManager : MonoBehaviour
         }
 
         //It this a power pellet
+        if (nodeController.isPowerPellet)
+        {
+            siren.Stop();
+            powerPelletAudio.Play();
+            isPowerPelletRunning = true;
+            currentPowerPelletTime = 0;
+            powerPelletMultiplier += 1;
+
+            redGhostContoller.SetFrightened(true);
+            blueGhostContoller.SetFrightened(true);
+            pinkGhostContoller.SetFrightened(true);
+            orangeGhostContoller.SetFrightened(true);
+        }
+    }
+
+    public IEnumerator PauseGame(float timeToPause)
+    {
+        gameIsRunning = false;
+        yield return new WaitForSeconds(timeToPause);
+        gameIsRunning = true;
+    }
+
+    public void GhostEaten()
+    {
+        StartCoroutine(PauseGame(1));
     }
 
     public IEnumerator PlayerEaten()
