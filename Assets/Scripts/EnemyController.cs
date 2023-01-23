@@ -113,6 +113,8 @@ public class EnemyController : MonoBehaviour
         //Set isFrightened
         isFrightened = false;
 
+        leftHomeBefore = false;
+
         //Set readyToLeaveHome to be false if there are blue or pink
         if (ghostType == GhostType.red)
         {

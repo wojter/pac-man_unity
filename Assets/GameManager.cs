@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
 
         if (clearedLevel || newGame)
         {
+            pelletsLeft = totalPellets;
             waitTimer = 4f;
             //Pellets will respawn when pacman clears the level or starts a new game
             for (int i=0; i< nodeControllers.Count; i++)
