@@ -83,7 +83,8 @@ public class EnemyController : MonoBehaviour
             respawnState = GhostNodesStatesEnum.rightNode;
 
         }
-        
+        //movementController.currentNode = startingNode;
+        //transform.position = startingNode.transform.position;
     }
 
 
@@ -92,7 +93,14 @@ public class EnemyController : MonoBehaviour
         ghostNodeState = startGhostNodeState;
 
         //Reset our ghost back to their home position
-        movementController.currentNode = startingNode;
+        //Debug.Log("startingNode", startingNode);
+        Debug.Log("currentNode", movementController);
+        if (movementController != null)
+        {
+            movementController.currentNode = startingNode;
+
+        }
+
         transform.position = startingNode.transform.position;
 
         //Set theri scatter node index back to 0
@@ -106,6 +114,10 @@ public class EnemyController : MonoBehaviour
         {
             readyToLeaveHome = true;
             leftHomeBefore = true;
+        }
+        else if (ghostType == GhostType.pink)
+        {
+            readyToLeaveHome = true;
         }
     }
 
@@ -131,7 +143,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            movementController.SetSpeed(3);
+            movementController.SetSpeed(1);
         }
     }
 

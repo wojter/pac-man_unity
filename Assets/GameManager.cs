@@ -104,8 +104,8 @@ public class GameManager : MonoBehaviour
         if (newGame)
         {
             startGameAudio.Play();
-            scoreText.text = "Score: " + score.ToString();
             score = 0;
+            scoreText.text = "Score: " + score.ToString();
             lives = 3;
             currentLevel = 1;
         }
@@ -131,6 +131,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void StopGame()
+    {
+        gameIsRunning = false;
+        siren.Stop();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -150,7 +156,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score:" + score.ToString();
     }
 
-    public void CollectedPellet(NodeController nodeController)
+    public IEnumerator CollectedPellet(NodeController nodeController)
     {
         if (currentMunch == 0)
         {
@@ -191,6 +197,15 @@ public class GameManager : MonoBehaviour
         }
         //Add to our score 
         AddToScore(10);
-        //Check
+        
+        //Check if there are any pellets left
+        if (pelletsLeft == 0)
+        {
+            currentLevel +=1;
+            clearedLevel = true;
+            StopGame();
+            yield return new WaitForSeconds(1);
+            StartCoroutine(Setup());
+        }
     }
 }
