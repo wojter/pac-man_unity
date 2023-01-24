@@ -9480,10 +9480,10 @@ MonoBehaviour:
   testRespawn: 0
   isFrightened: 0
   scatterNodes:
-  - {fileID: 375634629}
-  - {fileID: 1311502812}
-  - {fileID: 1386291980}
-  - {fileID: 1589125408}
+  - {fileID: 805801342}
+  - {fileID: 1444183139}
+  - {fileID: 2128730384}
+  - {fileID: 226656330}
   scatterNodeIndex: 0
   leftHomeBefore: 0
   isVisible: 1
