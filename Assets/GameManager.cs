@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour
     public int powerPelletMultiplier = 1;
 
     public Text livesText;
+    public Text highScoreText;
+
+    public int highScore;
 
     public enum GhostMode
     {
@@ -97,11 +100,16 @@ public class GameManager : MonoBehaviour
 
         blackBackground.enabled = false;
 
+        
+
         StartCoroutine(Setup());
     }
 
     public IEnumerator Setup()
     {
+        highScore = PlayerPrefs.GetInt("highScore");
+        highScoreText.text = "High score: " + highScore;
+
         ghostModeTimerIndex = 0;
         ghostModeTimer = 0;
         gameOverText.enabled = false;
@@ -257,6 +265,12 @@ public class GameManager : MonoBehaviour
     {
         score += amount;
         scoreText.text = "Score:" + score.ToString();
+        if (score > highScore)
+        {
+            highScore = score;
+            highScoreText.text = "High score: " + highScore;
+            PlayerPrefs.SetInt("highScore", highScore);
+        }
     }
 
     public IEnumerator CollectedPellet(NodeController nodeController)
@@ -358,7 +372,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         SetLives(lives - 1);
-        lives--;
         if (lives <= 0)
         {
             newGame = true;

@@ -110,7 +110,7 @@ public class EnemyController : MonoBehaviour
 
         //Reset our ghost back to their home position
         //Debug.Log("startingNode", startingNode);
-        Debug.Log("currentNode", movementController);
+        //Debug.Log("currentNode", movementController);
         if (movementController != null)
         {
             movementController.currentNode = startingNode;
