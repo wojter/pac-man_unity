@@ -217,13 +217,25 @@ public class EnemyController : MonoBehaviour
 
         if (movementController.currentNode.GetComponent<NodeController>().isSideNode)
         {
-            movementController.SetSpeed(1);
+            movementController.SetSpeed(movementController.maxSpeed / 2.0f);
         }
         else
         {
             if (isFrightened)
             {
-                movementController.SetSpeed(1);
+                if (gameManager.currentLevel == 1)
+                {
+                    movementController.SetSpeed(movementController.maxSpeed * 0.5f);
+                }
+                else if (gameManager.currentLevel > 1 && gameManager.currentLevel < 5)
+                {
+                    movementController.SetSpeed(movementController.maxSpeed * 0.55f);
+                }
+                else 
+                {
+                    movementController.SetSpeed(movementController.maxSpeed * 0.60f);
+                }
+
             }
             else if (ghostNodeState == GhostNodesStatesEnum.respawning)
             {
@@ -231,18 +243,21 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                if (gameManager.currentLevel == 1){
-                    movementController.SetSpeed(2);
-                }
-                else if (gameManager.currentLevel > 1 && gameManager.currentLevel < 3){
-                    movementController.SetSpeed(2.6f);
-                }
-                else if (gameManager.currentLevel > 2 && gameManager.currentLevel < 5)
+                if (gameManager.currentLevel == 1)
                 {
-                    movementController.SetSpeed(3.0f);
+                    movementController.SetSpeed(movementController.maxSpeed * 0.75f);
                 }
-                else                {
-                    movementController.SetSpeed(3.3f);
+                else if (gameManager.currentLevel > 1 && gameManager.currentLevel < 5)
+                {
+                    movementController.SetSpeed(movementController.maxSpeed * 0.85f);
+                }
+                else if (gameManager.currentLevel > 4 && gameManager.currentLevel < 21)
+                {
+                    movementController.SetSpeed(movementController.maxSpeed * 0.95f);
+                }
+                else
+                {
+                    movementController.SetSpeed(movementController.maxSpeed * 0.95f);
                 }
             }
         }

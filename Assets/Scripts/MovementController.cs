@@ -8,6 +8,7 @@ public class MovementController : MonoBehaviour
 
     public GameObject currentNode;
 
+    public float maxSpeed = 4.0f;
     public float speed = 4f;
 
     public string direction = "";

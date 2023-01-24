@@ -53,15 +53,19 @@ public class PlayerController : MonoBehaviour
     {
         if (gameManager.currentLevel == 1)
         {
-            movementController.SetSpeed(4);
+            movementController.SetSpeed(movementController.maxSpeed * 0.8f);
         }
-        else if (gameManager.currentLevel > 1 && gameManager.currentLevel < 3)
+        else if (gameManager.currentLevel > 1 && gameManager.currentLevel < 5)
         {
-            movementController.SetSpeed(4.3f);
+            movementController.SetSpeed(movementController.maxSpeed * 0.9f);
+        }
+        else if (gameManager.currentLevel > 4 && gameManager.currentLevel < 21)
+        {
+            movementController.SetSpeed(movementController.maxSpeed);
         }
         else
         {
-            movementController.SetSpeed(4.5f);
+            movementController.SetSpeed(movementController.maxSpeed * 0.9f);
         }
 
         if (!gameManager.gameIsRunning)
