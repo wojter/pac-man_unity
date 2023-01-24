@@ -51,6 +51,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameManager.currentLevel == 1)
+        {
+            movementController.SetSpeed(4);
+        }
+        else if (gameManager.currentLevel > 1 && gameManager.currentLevel < 3)
+        {
+            movementController.SetSpeed(4.3f);
+        }
+        else
+        {
+            movementController.SetSpeed(4.5f);
+        }
+
         if (!gameManager.gameIsRunning)
         {
             if (!isDead)

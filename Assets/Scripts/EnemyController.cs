@@ -231,7 +231,19 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                movementController.SetSpeed(2);
+                if (gameManager.currentLevel == 1){
+                    movementController.SetSpeed(2);
+                }
+                else if (gameManager.currentLevel > 1 && gameManager.currentLevel < 3){
+                    movementController.SetSpeed(2.6f);
+                }
+                else if (gameManager.currentLevel > 2 && gameManager.currentLevel < 5)
+                {
+                    movementController.SetSpeed(3.0f);
+                }
+                else                {
+                    movementController.SetSpeed(3.3f);
+                }
             }
         }
     }
