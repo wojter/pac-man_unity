@@ -1,2 +1,1 @@
-# pac-man_unity
-Pac-Man game write in Unity
+# Pac-Man inspired game in Unity
